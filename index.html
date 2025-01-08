@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gregorius Andika Panggalo - Portfolio Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1f2c;
+            --secondary-color: #2d3748;
+            --accent-color: #6366f1;
+            --text-color: #e2e8f0;
+            --hover-color: #818cf8;
+            --success-color: #10b981;
+            --section-padding: 80px 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Modern Dashboard Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(26, 31, 44, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo h2 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-color);
+        }
+
+        /* Hero Section Enhancement */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--section-padding);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .profile-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .hero img {
+            border-radius: 50%;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin: 30px 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--text-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin: 10px 0;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-section {
+            padding: var(--section-padding);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: rgba(45, 55, 72, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .dashboard-card h3 {
+            color: var(--accent-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dashboard-card i {
+            font-size: 24px;
+        }
+
+        /* Enhanced Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(0, 0, 0, 0.3));
+            padding: var(--section-padding);
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: rgba(45, 55, 72, 0.5);
+            padding: 20px 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .contact-card:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .contact-card i {
+            font-size: 24px;
+        }
+
+        /* Skill Progress Bars */
+        .skills {
+            padding: var(--section-padding);
+        }
+
+        .skill-bar {
+            margin: 20px 0;
+            background: rgba(45, 55, 72, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            width: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .dashboard-section {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .video-intro {
+            padding: var(--section-padding);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(0, 0, 0, 0.3));
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 40px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--accent-color);
+            background: rgba(45, 55, 72, 0.5);
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .video-container h2 {
+            color: var(--accent-color);
+            font-size: 32px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-description {
+            margin-top: 20px;
+            color: var(--text-color);
+            font-size: 18px;
+            line-height: 1.6;
+            opacity: 0.9;
+            padding: 0 20px;
+        }
+
+        /* Add responsive styles for video section */
+        @media (max-width: 768px) {
+            .video-container {
+                margin: 20px 10px;
+                padding: 15px;
+            }
+            
+            .video-container h2 {
+                font-size: 24px;
+            }
+
+            .video-description {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+        }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-code"></i>
+            <h2>GAP</h2>
+        </div>
+        <nav class="nav-links">
+            <a href="#education"><i class="fas fa-graduation-cap"></i> Pendidikan</a>
+            <a href="#hobbies"><i class="fas fa-heart"></i> Hobby</a>
+            <a href="#biography"><i class="fas fa-user"></i> Biografi</a>
+            <a href="#skills"><i class="fas fa-chart-bar"></i> Vid Perkenalan</a>
+        </nav>
+    </header>
+
+    <div class="hero" data-aos="fade-up">
+        <div class="profile-container" data-aos="zoom-in">
+            <img src="Profil.jpg" alt="Profile Picture">
+        </div>
+        <h1 data-aos="fade-up" data-aos-delay="200">Gregorius Andika Panggalo</h1>
+        <p data-aos="fade-up" data-aos-delay="400">Digital | Interactive | Print | Brand | Video + Motion</p>
+    </div>
+
+    <section id="education" class="dashboard-section">
+        <div class="dashboard-card" data-aos="fade-up">
+            <h3><i class="fas fa-school"></i> Pendidikan</h3>
+            <div class="education-timeline">
+                <p>🎓 TK Angela Rosari Paku Makale (2010-2011)</p>
+                <p>🎓 SD Katolik Renya Rosari Paku Makale (2011-2017)</p>
+                <p>🎓 SMP Katolik Pelita Bangsa (2017-2019)</p>
+                <p>🎓 SMAN 5 Tana Toraja (2020-2023)</p>
+                <p>🎓 Universitas Teknologi Yogyakarta (2024-Sekarang)</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card" data-aos="fade-up" data-aos-delay="200">
+            <h3><i class="fas fa-heart"></i> Hobby</h3>
+            <p>🏀 Bola Basket</p>
+            <p>🏃‍♂️ Atletik</p>
+            <p>✈️ Travelling</p>
+        </div>
+
+        <div class="dashboard-card" data-aos="fade-up" data-aos-delay="400">
+            <h3><i class="fas fa-user-circle"></i> Biografi</h3>
+            <p>Gregorius Andika Panggalo: Inspirasi Muda dengan Semangat Tak Kenal Lelah
+
+                Lahir di Makale pada 18 November 2005, Gregorius Andika Panggalo tumbuh sebagai sosok yang penuh semangat dan dedikasi. Di usianya yang masih muda, Gregorius telah membuktikan bahwa kerja keras dan tekad adalah kunci untuk meraih impian. Kecintaannya pada dunia basket tidak hanya menjadikannya pemain yang tangguh, tetapi juga pribadi yang menginspirasi.
+                
+                Prestasi demi prestasi dalam olahraga basket berhasil ia raih melalui latihan tanpa henti dan komitmen yang luar biasa. Namun, bagi Gregorius, kemenangan bukanlah tujuan akhir. Ia percaya bahwa setiap perjalanan, termasuk jatuh bangun di lapangan, adalah pelajaran berharga yang membentuk karakter dan membangun mimpi lebih besar.
+                
+                Gregorius menjadikan basket sebagai sarana untuk mengajarkan nilai-nilai kehidupan: disiplin, kebersamaan, dan keberanian untuk menghadapi tantangan. Melalui kisahnya, ia mengajak semua orang, terutama generasi muda, untuk tidak takut bermimpi besar. Ia adalah bukti nyata bahwa dengan usaha dan keyakinan, bahkan impian yang tampak mustahil sekalipun dapat menjadi kenyataan.
+                
+                "Jangan pernah menyerah. Jadikan setiap kegagalan sebagai pijakan untuk melompat lebih tinggi," pesan Gregorius kepada siapa saja yang tengah berjuang meraih cita-citanya.
+                
+                Semangatnya yang menyala-nyala adalah pengingat bagi kita semua bahwa tidak ada batasan untuk sukses selama kita berani bermimpi dan berusaha. Gregorius Andika Panggalo adalah simbol harapan, inspirasi, dan bukti bahwa masa depan selalu dimulai dengan langkah pertama.
+                
+
+            </p>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <h2>Video Perkenalan</h2>
+        <div class="dashboard-card" data-aos="fade-up" data-aos-delay="400">
+    <video width="320" height="240" controls>
+        <source src="Vid.mp4s" type="video/mp4">
+      </video>
+    </div>
+    </section>
+
+    <section class="contact">
+        <h2>Kontak</h2>
+        <p>Hubungi saya melalui:</p>
+        <div class="contact-links">
+            <a href="https://wa.me/6285298990812" class="contact-card" target="_blank" data-aos="zoom-in">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://www.instagram.com/andikapanggalo18" class="contact-card" target="_blank" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="http://t.me/cuttingstinger" class="contact-card" target="_blank" data-aos="zoom-in" data-aos-delay="400">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize skill bars
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const value = bar.getAttribute('data-value');
+                setTimeout(() => {
+                    bar.style.width = `${value}%`;
+                }, 500);
+            });
+        });
+        
+    </script>
+</body>
+</html>
